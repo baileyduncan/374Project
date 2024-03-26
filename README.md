@@ -1,3 +1,2 @@
 ﻿# 374Project
-def func(x):
-  return x + 2
+If this doesn't work, you can blame my roommate.
