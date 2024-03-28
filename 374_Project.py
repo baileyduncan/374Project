@@ -1,4 +1,15 @@
 #Code :)
+import numpy as np
+from scipy.optimize import fsolve
+import param
+
+#KL Values
+t_line_kl = .9
+t_branch_kl = 2
+ekl = .9
+gv = 10 # open globe valve
+sink_exit = 10
+toliet_exit = 14
 rho = 62.3 #lbm/ft3
 mu = 6.733E0-4 #lbm/ft*s
 g = 32.174 #ft/s^2
