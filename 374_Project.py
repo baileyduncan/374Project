@@ -11,10 +11,10 @@ g = 32.174 #ft/s^2
 #g = 9.81 #m/s^2
 Vdot = 1/60/7.48 #ft^3/sec
 #Vdot = 1/15850 #m^3/sec
-delz = 20 #ft
+delz = 24 #ft
 #delz = 20/3.28
 kL = [.9, 2.0, 0.9, 10, 14, 10]
-L = 23   #ft
+L = 27  #ft
 #L = 23/3.28 #m
 D = 1/12 # ft
 #D = 1/12/3.28 #m
@@ -46,4 +46,4 @@ def Hp():
   head = delz + (f*(L/D) + np.sum(kL))*vel**2/(2*g)
   return head
 
-print('head=', Hp())
+print('pump head=', Hp())
