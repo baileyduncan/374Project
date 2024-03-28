@@ -7,3 +7,4 @@ if James_smells:
   print("James smells.")
 
 print("Hello World")
+print(hi)
