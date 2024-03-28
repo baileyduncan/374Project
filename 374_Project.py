@@ -31,5 +31,5 @@ def f_cb(esp, D, Re, f, fguess):
 
 #Head loss equation
 #You'll need to set kL equal to an array for this to work
-def Hp(z, f, L, D, Kl, v, g):
-  return z + (f*(L/D) + np.sum(kl)v**2/(2*g)
+def Hp(delz, f, L, D, Kl, v, g):
+  return delz + (f*(L/D) + np.sum(kl)v**2/(2*g)
