@@ -14,6 +14,7 @@ rho = 62.3 #lbm/ft3
 mu = 6.733E0-4 #lbm/ft*s
 g = 32.174 #ft/s^2
 Vdot = 1 #gal/min
+delz = 20 #ft
 
 #Velocity Equation
 def v(Vdot, D):
