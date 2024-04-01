@@ -1,6 +1,6 @@
 #Code :)
 
-# Date 3/28/24
+# Date 3/28/24 (James Burk) 
 
 import numpy as np 
 from scipy.optimize import fsolve
@@ -52,7 +52,7 @@ def Hp():
 print('pump head=', Hp())
 
 
-#Date 4/1/12
+#Date 4/1/12 (Grace/James/Brian)
 import numpy as np
 from scipy.optimize import fsolve
 
