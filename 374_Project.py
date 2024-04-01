@@ -88,3 +88,60 @@ Vguess = [1,1,1]
 answer = fsolve(equation,Vguess)
 
 answer
+
+
+
+
+## Bailey's Nonsense 4/1/24
+#import necessary packages
+import numpy as np
+import scipy.optimize as opt
+
+#Given Constants
+rho = 62.3 #lbm/ft^3 - density of water
+mu = 6.733e-4 #lbm/ft/s - viscosity of water
+eps = 0 # Roughness factor
+el = 0.9
+tee_branch = 2
+tee_line = 0.9
+
+#Define Colebrook Function
+def Colebrook(Re, eps, D, fguess):
+  def resid(fg):
+    leftside = 1 / np.sqrt(fg)
+    rightside = -2.0 * np.log10(eps/D/3.7 + 2/51/Re/np.sqrt(fg))
+    return leftside - rightside
+  return opt.fsolve(resid,fguess)[0]
+
+import numpy as np
+
+def resid(guesses, KL, D, L, eps, rho, mu):
+    num_pipes = len(KL)
+    Vdot = guesses[:num_pipes]
+    Vdot_tot = sum(Vdot)
+    v = [Vdot[i] / (np.pi/4 * D[i]**2) for i in range(num_pipes)]
+    Re = [rho * v[i] * D[i] / mu for i in range(num_pipes)]
+    f = [Colebrook(Re[i], eps, D[i], 0.001) for i in range(num_pipes)]
+    PL = [(f[i] * (L[i]/D[i]) + KL[i]) * v[i]**2 * rho / 2 for i in range(num_pipes)]
+    resid1 = [PL[i+1] - PL[i] for i in range(num_pipes-1)]
+    resid2 = [-PL[0] + P1]
+    return resid1 + resid2
+  
+D = [0.75/12, 0.75/12, 0.75/12, 0.75/12, 0.75/12, 0.75/12, 0.75/12, 0.75/12, 0.75/12, 0.75/12, 0.75/12, 0.75/12, 0.75/12]
+L = [20, 3, 4, 3, 4, 3, 4, 7.5, 4, 3, 4, 3, 4]
+KL = [el, 0, tee_branch+el, tee_line, tee_branch+el, tee_line, tee_branch+el, 2*el, tee_branch+el, tee_line, tee_branch+el, tee_line, 2*el]
+
+array_length = 13
+value = 5
+guesses = np.full(array_length, value)
+
+
+# Reference pressure
+P1 = 0
+
+# Call the resid function
+residuals = resid(guesses, KL, D, L, eps, rho, mu)
+Vdot = opt.fsolve(resid,guesses,args = (KL, D, L, eps, rho, mu))
+print("Residuals:", residuals)
+
+Vdot
