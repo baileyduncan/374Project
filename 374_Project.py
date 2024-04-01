@@ -1,4 +1,7 @@
 #Code :)
+
+# Date 3/28/24
+
 import numpy as np 
 from scipy.optimize import fsolve
 
@@ -47,3 +50,41 @@ def Hp():
   return head
 
 print('pump head=', Hp())
+
+
+#Date 4/1/12
+import numpy as np
+from scipy.optimize import fsolve
+
+D = 1/12 
+Aa = (np.pi/4)*D**2
+Ab = (np.pi/4)*D**2
+Ac = (np.pi/4)*D**2
+Ad = (np.pi/4)*D**2
+Ae = (np.pi/4)*D**2
+Af = (np.pi/4)*D**2
+
+def equation(V):
+
+  Vb, Vd, Vf = V
+
+  vb = Vb/Ab
+  vd = Vd/Ad
+  vf = 1 ## put this into the right units and get this fsolve to work :)
+
+  va = ((vb * Ab) + (vc * Ac)) / Aa
+  vb = ((va * Aa) - (vc * Ac)) / Ab
+  vc = ((va * Aa) - (vb * Ab)) / Ac
+  vd = ((vc * Ac) - (ve * Ae)) / Ad
+  ve = ((vc * Ac) - (vd * Ad)) / Ae
+  vf = ((ve * Ae)) / Af
+
+  velocities = [va, vb, vc, vd, ve, vf]
+
+  return velocities
+
+Vguess = [1,1,1]
+
+answer = fsolve(equation,Vguess)
+
+answer
